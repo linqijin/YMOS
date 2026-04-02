@@ -1,0 +1,444 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775093293455,
+  "projectRoot": "E:\\ai-workspace\\YMOS",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "Brain": {
+      "path": "Brain",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775093293418,
+      "keyFiles": [
+        "SOP_初始调研.md",
+        "SOP_策略分析.md"
+      ]
+    },
+    "efinance": {
+      "path": "efinance",
+      "purpose": null,
+      "fileCount": 12,
+      "lastAccessed": 1775093293419,
+      "keyFiles": [
+        "changelog.md",
+        "docker-compose.yaml",
+        "Dockerfile",
+        "LICENSE",
+        "pyproject.toml"
+      ]
+    },
+    "Eyes": {
+      "path": "Eyes",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775093293420,
+      "keyFiles": [
+        "SOP_市场洞察.md",
+        "SOP_投资雷达.md"
+      ]
+    },
+    "Hands": {
+      "path": "Hands",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1775093293420,
+      "keyFiles": [
+        "README.md",
+        "SOP_买卖信号.md",
+        "SOP_仓位规划.md",
+        "SOP_复盘统计.md",
+        "SOP_选股扫描.md"
+      ]
+    },
+    "knowlege": {
+      "path": "knowlege",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1775093293421,
+      "keyFiles": [
+        "交易系统.md",
+        "如何买卖.md",
+        "如何选股.md",
+        "股票上涨底层逻辑.md"
+      ]
+    },
+    "test_out": {
+      "path": "test_out",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1775093293421,
+      "keyFiles": [
+        "price_scan_tushare_final_test.json",
+        "price_scan_tushare_test.json",
+        "price_scan_tushare_verify.json",
+        "price_scan_yahoo_verify.json"
+      ]
+    },
+    "持仓与关注": {
+      "path": "持仓与关注",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1775093293421,
+      "keyFiles": [
+        "SOP_入职引导.md",
+        "SOP_持仓收口.md",
+        "SOP_标的管理.md",
+        "Watchlist_状态机.md",
+        "当前关注方向与投资偏好.md"
+      ]
+    },
+    "efinance\\docs": {
+      "path": "efinance\\docs",
+      "purpose": "Documentation",
+      "fileCount": 6,
+      "lastAccessed": 1775093293422,
+      "keyFiles": [
+        "api.md",
+        "conf.py",
+        "example.md"
+      ]
+    },
+    "Eyes\\scripts": {
+      "path": "Eyes\\scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 14,
+      "lastAccessed": 1775093293423,
+      "keyFiles": [
+        "env_loader.py",
+        "fetch_finnhub_news.py",
+        "fetch_market_api.py"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "持仓与关注\\持仓_状态机.md",
+      "accessCount": 8,
+      "lastAccessed": 1775095725421,
+      "type": "file"
+    },
+    {
+      "path": "总入口暗号.md",
+      "accessCount": 6,
+      "lastAccessed": 1774948192892,
+      "type": "file"
+    },
+    {
+      "path": "持仓与关注\\Watchlist_状态机.md",
+      "accessCount": 4,
+      "lastAccessed": 1775095785886,
+      "type": "file"
+    },
+    {
+      "path": "持仓与关注\\当前关注方向与投资偏好.md",
+      "accessCount": 4,
+      "lastAccessed": 1775117432549,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\scripts\\fetch_price_yahoo.py",
+      "accessCount": 3,
+      "lastAccessed": 1774949416255,
+      "type": "file"
+    },
+    {
+      "path": "持仓与关注\\持仓\\浪潮信息_000977.SZ\\个股基础知识库.md",
+      "accessCount": 3,
+      "lastAccessed": 1775111851831,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\references\\route-cheatsheet.md",
+      "accessCount": 2,
+      "lastAccessed": 1774948236254,
+      "type": "file"
+    },
+    {
+      "path": ".env",
+      "accessCount": 2,
+      "lastAccessed": 1775093321380,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\市场洞察\\2026-03\\2026-03-31_市场洞察.md",
+      "accessCount": 2,
+      "lastAccessed": 1775093458738,
+      "type": "file"
+    },
+    {
+      "path": "持仓与关注\\持仓\\浪潮信息_000977.SZ\\买入卖出备忘录.md",
+      "accessCount": 2,
+      "lastAccessed": 1775111768215,
+      "type": "file"
+    },
+    {
+      "path": "knowlege\\如何选股.md",
+      "accessCount": 2,
+      "lastAccessed": 1775112233921,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\SOP_选股扫描.md",
+      "accessCount": 2,
+      "lastAccessed": 1775112234415,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\P17-选股筛选器.md",
+      "accessCount": 2,
+      "lastAccessed": 1775112234491,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\市场洞察\\2026-04\\2026-04-02_市场洞察.md",
+      "accessCount": 2,
+      "lastAccessed": 1775117432498,
+      "type": "file"
+    },
+    {
+      "path": "knowlege\\股票上涨底层逻辑.md",
+      "accessCount": 1,
+      "lastAccessed": 1774946703615,
+      "type": "file"
+    },
+    {
+      "path": "knowlege\\交易系统.md",
+      "accessCount": 1,
+      "lastAccessed": 1774946703689,
+      "type": "file"
+    },
+    {
+      "path": "knowlege\\如何买卖.md",
+      "accessCount": 1,
+      "lastAccessed": 1774946703755,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\P18-买入信号.md",
+      "accessCount": 1,
+      "lastAccessed": 1774947653110,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\P19-卖出信号.md",
+      "accessCount": 1,
+      "lastAccessed": 1774947654451,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\P20-仓位纪律.md",
+      "accessCount": 1,
+      "lastAccessed": 1774947844165,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\P21-复盘统计.md",
+      "accessCount": 1,
+      "lastAccessed": 1774947845465,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\SOP_买卖信号.md",
+      "accessCount": 1,
+      "lastAccessed": 1774947846975,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\SOP_仓位规划.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948070861,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\SOP_复盘统计.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948072245,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\checklist_买入.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948073585,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\references\\checklist_卖出.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948074975,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\README.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948304934,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\选股池\\README.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948308076,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\交易记录\\README.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948309562,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\统计报告\\README.md",
+      "accessCount": 1,
+      "lastAccessed": 1774948310874,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\scripts\\fetch_price_tushare.py",
+      "accessCount": 1,
+      "lastAccessed": 1774948618421,
+      "type": "file"
+    },
+    {
+      "path": ".env.example",
+      "accessCount": 1,
+      "lastAccessed": 1774948728534,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\scripts\\env_loader.py",
+      "accessCount": 1,
+      "lastAccessed": 1774948764238,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\scripts\\fetch_price_router.py",
+      "accessCount": 1,
+      "lastAccessed": 1774948764323,
+      "type": "file"
+    },
+    {
+      "path": "Hands\\选股池\\2026-03\\2026-03-31_选股池.md",
+      "accessCount": 1,
+      "lastAccessed": 1774950753232,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\SOP_市场洞察.md",
+      "accessCount": 1,
+      "lastAccessed": 1775093310058,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\references\\p13-market-scanner.md",
+      "accessCount": 1,
+      "lastAccessed": 1775093321268,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\references\\cio-rss-processor.md",
+      "accessCount": 1,
+      "lastAccessed": 1775093321287,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\市场洞察\\Raw_Data\\2026-04\\financial_data_20260402.json",
+      "accessCount": 1,
+      "lastAccessed": 1775093905685,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\SOP_投资雷达.md",
+      "accessCount": 1,
+      "lastAccessed": 1775095363612,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\投资雷达\\2026-03\\2026-03-31_投资雷达.md",
+      "accessCount": 1,
+      "lastAccessed": 1775095412660,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\市场洞察\\2026-03\\2026-03-27_市场洞察.md",
+      "accessCount": 1,
+      "lastAccessed": 1775095412696,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\市场洞察\\2026-03\\2026-03-30_市场洞察.md",
+      "accessCount": 1,
+      "lastAccessed": 1775095412725,
+      "type": "file"
+    },
+    {
+      "path": "Eyes\\投资雷达\\2026-04\\投资雷达_2026-04-02.md",
+      "accessCount": 1,
+      "lastAccessed": 1775095593668,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\SOP_策略分析.md",
+      "accessCount": 1,
+      "lastAccessed": 1775111571563,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\references\\p2-phase-check.md",
+      "accessCount": 1,
+      "lastAccessed": 1775111571631,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\references\\p12-referee.md",
+      "accessCount": 1,
+      "lastAccessed": 1775111603586,
+      "type": "file"
+    },
+    {
+      "path": "Brain\\references\\p6-profit-keeper.md",
+      "accessCount": 1,
+      "lastAccessed": 1775111603603,
+      "type": "file"
+    },
+    {
+      "path": "持仓与关注\\持仓\\浪潮信息_000977.SZ\\2026-03-31_浪潮信息_持有评估.md",
+      "accessCount": 1,
+      "lastAccessed": 1775111615053,
+      "type": "file"
+    },
+    {
+      "path": "持仓与关注\\持仓\\浪潮信息_000977.SZ\\2026-04-02_持有评估.md",
+      "accessCount": 1,
+      "lastAccessed": 1775111751833,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

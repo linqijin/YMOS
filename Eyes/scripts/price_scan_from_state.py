@@ -9,11 +9,17 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import io
 import os
 import re
 import subprocess
 import sys
 from pathlib import Path
+
+# 修复 Windows 控制台编码问题
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPTS_DIR.parents[1]  # Eyes/scripts → Eyes → YMOS

@@ -14,10 +14,16 @@ import os
 import ssl
 import sys
 import time
+import io
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+
+# 修复 Windows 控制台编码问题
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPTS_DIR.parents[1]  # Eyes/scripts → Eyes → YMOS

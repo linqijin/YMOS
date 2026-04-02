@@ -1,28 +1,36 @@
 #!/usr/bin/env python3
 """
-价格路由器（三源分流版）
+价格路由器（四源三级分流版）
 
 路由规则（优先级顺序）：
   美股 / Crypto（无后缀）→ Finnhub（若有 FINNHUB_API_KEY，否则 Yahoo 兜底）
-  A股（.SS / .SZ）       → Tushare（若有 TUSHARE_TOKEN，否则 Yahoo 兜底）
+  A股（.SS / .SZ）       → Tushare（若有 TUSHARE_TOKEN）→ efinance（备选）→ Yahoo（最终兜底）
   港股（.HK）            → Yahoo（固定，无需 Key）
 
 设计原则：
-  - Yahoo 是零配置开箱即用的兜底，任何市场在 Key 缺失时都回退到 Yahoo
-  - 有对应的 Key/Token 就走专用源，精度和稳定性更高
-  - 三个分支完全独立，互不阻塞
+  - Yahoo 是零配置开箱即用的最终兜底
+  - A股采用三级分流：Tushare（有Token）→ efinance（免注册）→ Yahoo
+  - efinance 基于东方财富，A股数据质量优于 Yahoo
 
 2026-03-16 重构：新增 Tushare A股分支，A股不再走 Yahoo（科创板数据质量问题）
 2026-03-17 增强：Crypto 符号归一化（BTC→BINANCE:BTCUSDT / BTC-USD），避免裸符号返回股票语义价格
+2026-03-31 增强：新增 efinance 作为 A股二级备选（Tushare 失败时自动回退）
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
 import sys
+import io
 from pathlib import Path
+
+# 修复 Windows 控制台编码问题
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 YMOS_ROOT = SCRIPTS_DIR.parents[1]   # Eyes/scripts → Eyes → YMOS
@@ -105,7 +113,7 @@ def run(cmd: list[str]) -> int:
 def main() -> None:
     load_dotenv()
 
-    p = argparse.ArgumentParser(description="YMOS 价格路由器（三源分流）")
+    p = argparse.ArgumentParser(description="YMOS 价格路由器（四源三级分流）")
     p.add_argument("--symbols", required=True,
                    help="逗号分隔，如 AAPL,NIO,688008.SS,0700.HK")
     p.add_argument("--output-dir", default="Report/投资雷达/Raw_Data", help="输出目录")
@@ -125,7 +133,8 @@ def main() -> None:
 
     # ── 分流 ────────────────────────────────────────────────────────────────
     finnhub_syms: list[str] = []
-    tushare_syms: list[str] = []
+    tushare_syms: list[str] = []   # 有 Token 的 A股
+    efinance_syms: list[str] = []  # 无 Token 或 Tushare 失败后的 A股
     yahoo_syms:   list[str] = []
 
     for s in symbols:
@@ -137,9 +146,9 @@ def main() -> None:
                 yahoo_syms.append(s)          # 无 Key → Yahoo 兜底
         elif bucket == "tushare":
             if tushare_token:
-                tushare_syms.append(s)
+                tushare_syms.append(s)        # 有 Token → Tushare 优先
             else:
-                yahoo_syms.append(s)          # 无 Token → Yahoo 兜底
+                efinance_syms.append(s)       # 无 Token → efinance 备选
         else:  # "yahoo"
             yahoo_syms.append(s)
 
@@ -150,19 +159,16 @@ def main() -> None:
     print(f"📡 价格路由分流结果：")
     print(f"   Finnhub  ({len(finnhub_syms)}): {finnhub_syms or '—'}")
     print(f"   Tushare  ({len(tushare_syms)}): {tushare_syms or '—'}")
+    print(f"   efinance ({len(efinance_syms)}): {efinance_syms or '—'}")
     print(f"   Yahoo    ({len(yahoo_syms)}): {yahoo_syms or '—'}")
     print()
 
     # ── Crypto 归一化：裸符号 → 数据源专用格式 ────────────────────────────
     finnhub_syms_norm = [normalize_for_source(s, "finnhub") for s in finnhub_syms]
-    yahoo_syms_norm   = [normalize_for_source(s, "yahoo")   for s in yahoo_syms]
 
-    if finnhub_syms_norm != finnhub_syms or yahoo_syms_norm != yahoo_syms:
+    if finnhub_syms_norm != finnhub_syms:
         print(f"🔄 Crypto 归一化：")
-        if finnhub_syms_norm != finnhub_syms:
-            print(f"   Finnhub: {finnhub_syms} → {finnhub_syms_norm}")
-        if yahoo_syms_norm != yahoo_syms:
-            print(f"   Yahoo:   {yahoo_syms} → {yahoo_syms_norm}")
+        print(f"   Finnhub: {finnhub_syms} → {finnhub_syms_norm}")
         print()
 
     # ── Finnhub ─────────────────────────────────────────────────────────────
@@ -181,6 +187,7 @@ def main() -> None:
             print(f"⚠️ Finnhub 调用失败（exit {code}），对应 ticker 可能无价格数据")
 
     # ── Tushare（A股）───────────────────────────────────────────────────────
+    tushare_failed_syms: list[str] = []
     if tushare_syms:
         out = out_dir / f"price_scan_tushare_{date_tag}.json"
         cmd = [
@@ -191,11 +198,51 @@ def main() -> None:
             "--output", str(out),
         ]
         code = run(cmd)
+
+        # 检查输出文件的成功率（而不只是 exit code）
+        success_count = 0
+        if out.exists():
+            try:
+                with open(out, "r", encoding="utf-8") as f:
+                    result = json.load(f)
+                data = result.get("data", [])
+                success_count = sum(1 for x in data if x.get("ok"))
+            except Exception:
+                pass
+
+        if code != 0 or success_count == 0:
+            print(f"⚠️ Tushare 调用失败（exit {code}, 成功 {success_count}/{len(tushare_syms)}），将尝试 efinance 兜底")
+            tushare_failed_syms = tushare_syms  # 全部回退到 efinance
+        elif success_count < len(tushare_syms):
+            # 部分成功：失败的 ticker 回退到 efinance
+            failed = [s for s in tushare_syms if s not in [x.get("symbol") for x in data if x.get("ok")]]
+            if failed:
+                print(f"⚠️ Tushare 部分失败，{len(failed)} 个 ticker 将尝试 efinance: {failed}")
+                tushare_failed_syms = failed
+
+    # ── efinance（A股备选）─────────────────────────────────────────────────
+    # 合并：无 Token 的 A股 + Tushare 失败的 A股
+    all_efinance_syms = efinance_syms + tushare_failed_syms
+    efinance_failed_syms: list[str] = []
+    if all_efinance_syms:
+        out = out_dir / f"price_scan_efinance_{date_tag}.json"
+        cmd = [
+            sys.executable,
+            str(SCRIPTS_DIR / "fetch_price_efinance.py"),
+            "--symbols", ",".join(all_efinance_syms),
+            "--output", str(out),
+        ]
+        code = run(cmd)
         if code != 0:
-            print(f"⚠️ Tushare 调用失败（exit {code}），对应 ticker 可能无价格数据")
+            print(f"⚠️ efinance 调用失败（exit {code}），将尝试 Yahoo 兜底")
+            efinance_failed_syms = all_efinance_syms
+            yahoo_syms.extend(efinance_failed_syms)
 
     # ── Yahoo（港股 + 兜底）─────────────────────────────────────────────────
-    if yahoo_syms_norm:
+    # 注意：yahoo_syms 可能在运行时被修改（添加 efinance 失败的 A股）
+    # A股格式 .SS/.SZ 需要转换为 Yahoo 格式：.SS → .SS, .SZ → .SZ（Yahoo 支持）
+    if yahoo_syms:
+        yahoo_syms_norm = [normalize_for_source(s, "yahoo") for s in yahoo_syms]
         out = out_dir / f"price_scan_yahoo_{date_tag}.json"
         cmd = [
             sys.executable,

@@ -1,0 +1,17 @@
+{
+  "source": "Yahoo Finance V8 Chart API",
+  "fetched_at": "2026-03-31T09:31:11.108884+00:00",
+  "count": 1,
+  "symbols": [
+    "688981.SH"
+  ],
+  "period": "1mo",
+  "interval": "1d",
+  "data": [
+    {
+      "symbol": "688981.SH",
+      "ok": false,
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ]
+}

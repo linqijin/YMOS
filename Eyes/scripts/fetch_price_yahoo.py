@@ -20,12 +20,19 @@ Yahoo Finance A股/港股/美股轻量行情脚本（原生 V8 API，无第三�
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import ssl
+import sys
 import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+
+# 修复 Windows 控制台编码问题
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 
 def parse_symbols(raw: str) -> list[str]:

@@ -1,0 +1,58 @@
+{
+  "source": "Tushare Pro daily API",
+  "fetched_at": "2026-03-31T09:51:28.570449+00:00",
+  "count": 3,
+  "symbols": [
+    "002549.SZ",
+    "600744.SS",
+    "000977.SZ"
+  ],
+  "skipped": [],
+  "data": [
+    {
+      "symbol": "002549.SZ",
+      "ts_code": "002549.SZ",
+      "ok": true,
+      "trade_date": "20260331",
+      "last_close": 18.0,
+      "last_open": 18.69,
+      "last_high": 18.75,
+      "last_low": 17.97,
+      "last_volume": 424857.56,
+      "pre_close": 18.8,
+      "change": -0.8,
+      "pct_chg": -4.2553,
+      "amount_wan": 774827.979
+    },
+    {
+      "symbol": "600744.SS",
+      "ts_code": "600744.SH",
+      "ok": true,
+      "trade_date": "20260331",
+      "last_close": 7.56,
+      "last_open": 7.66,
+      "last_high": 8.0,
+      "last_low": 7.54,
+      "last_volume": 1401357.74,
+      "pre_close": 7.75,
+      "change": -0.19,
+      "pct_chg": -2.4516,
+      "amount_wan": 1085860.681
+    },
+    {
+      "symbol": "000977.SZ",
+      "ts_code": "000977.SZ",
+      "ok": true,
+      "trade_date": "20260331",
+      "last_close": 56.08,
+      "last_open": 56.5,
+      "last_high": 57.75,
+      "last_low": 56.01,
+      "last_volume": 234628.35,
+      "pre_close": 56.7,
+      "change": -0.62,
+      "pct_chg": -1.0935,
+      "amount_wan": 1329768.309
+    }
+  ]
+}

@@ -33,9 +33,15 @@ import argparse
 import json
 import os
 import sys
+import io
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+# 修复 Windows 控制台编码问题
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
@@ -44,7 +50,7 @@ ROOT = SCRIPTS_DIR.parents[1]  # Eyes/scripts → Eyes → YMOS
 sys.path.insert(0, str(SCRIPTS_DIR))
 from env_loader import load_dotenv
 
-TUSHARE_API_URL = "http://api.tushare.pro"
+TUSHARE_API_URL = "http://lianghua.nanyangqiankun.top"
 
 
 # ── Ticker 格式转换 ────────────────────────────────────────────────────────

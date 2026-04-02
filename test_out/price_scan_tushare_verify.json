@@ -1,0 +1,42 @@
+{
+  "source": "Tushare Pro daily API",
+  "fetched_at": "2026-03-31T09:30:48.443793+00:00",
+  "count": 2,
+  "symbols": [
+    "000001.SZ",
+    "600519.SS"
+  ],
+  "skipped": [],
+  "data": [
+    {
+      "symbol": "000001.SZ",
+      "ts_code": "000001.SZ",
+      "ok": true,
+      "trade_date": "20260331",
+      "last_close": 11.08,
+      "last_open": 11.0,
+      "last_high": 11.18,
+      "last_low": 10.99,
+      "last_volume": 1164565.34,
+      "pre_close": 10.99,
+      "change": 0.09,
+      "pct_chg": 0.8189,
+      "amount_wan": 1294675.716
+    },
+    {
+      "symbol": "600519.SS",
+      "ts_code": "600519.SH",
+      "ok": true,
+      "trade_date": "20260331",
+      "last_close": 1450.0,
+      "last_open": 1468.0,
+      "last_high": 1479.93,
+      "last_low": 1448.41,
+      "last_volume": 61690.66,
+      "pre_close": 1420.0,
+      "change": 30.0,
+      "pct_chg": 2.1127,
+      "amount_wan": 9015486.797
+    }
+  ]
+}

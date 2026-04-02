@@ -22,8 +22,14 @@ import json
 import ssl
 import sys
 import os
+import io
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+# 修复 Windows 控制台编码问题
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # ============================================================
 # 内置默认源（当 rss_sources.json 不存在时使用）
